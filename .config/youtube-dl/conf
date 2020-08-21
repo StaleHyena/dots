@@ -1,0 +1,3 @@
+# omit the video id
+-o '%(title)s.%(ext)s'
+
