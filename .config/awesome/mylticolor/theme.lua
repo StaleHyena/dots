@@ -215,6 +215,7 @@ local memory = lain.widget.mem({
 -- MPD
 local mpdicon = wibox.widget.imagebox()
 theme.mpd = lain.widget.mpd({
+    music_dir = "/cold/hepoc/Music",
     settings = function()
         mpd_notification_preset = {
             text = string.format("%s [%s] - %s\n%s", mpd_now.artist,
