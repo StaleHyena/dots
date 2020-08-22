@@ -215,7 +215,6 @@ local memory = lain.widget.mem({
 -- MPD
 local mpdicon = wibox.widget.imagebox()
 theme.mpd = lain.widget.mpd({
-    music_dir = "/cold/hepoc/Music",
     settings = function()
         mpd_notification_preset = {
             text = string.format("%s [%s] - %s\n%s", mpd_now.artist,
@@ -223,8 +222,20 @@ theme.mpd = lain.widget.mpd({
         }
 
         if mpd_now.state == "play" then
-            artist = mpd_now.artist .. " > "
-            title  = mpd_now.title .. " "
+            local l_artist = mpd_now.artist
+            local l_title = mpd_now.title
+            -- Guess artist name if title is separated by ' - '
+            -- Some radios don't supply correct metadata
+            -- TODO - maybe set the table values directly?
+            if l_artist == "N/A" then
+                local b_indx, e_indx = l_title:find(".%s%-%s.")
+                if b_indx then
+                    l_artist = l_title:sub(1, b_indx)
+                    l_title = l_title:sub(e_indx)
+                end
+            end
+            artist = l_artist .. " > "
+            title  = l_title .. " "
             mpdicon:set_image(theme.widget_note_on)
         elseif mpd_now.state == "pause" then
             artist = "mpd "
