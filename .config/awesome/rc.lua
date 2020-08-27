@@ -57,20 +57,6 @@ local function run_once(cmd_arr)
     end
 end
 
-run_once({ "urxvtd", "unclutter -root" }) -- entries must be separated by commas
-
--- This function implements the XDG autostart specification
---[[
-awful.spawn.with_shell(
-    'if (xrdb -query | grep -q "^awesome\\.started:\\s*true$"); then exit; fi;' ..
-    'xrdb -merge <<< "awesome.started:true";' ..
-    -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
-    'dex --environment Awesome --autostart --search-paths "$XDG_CONFIG_DIRS/autostart:$XDG_CONFIG_HOME/autostart"' -- https://github.com/jceb/dex
-)
---]]
-
--- }}}
-
 -- {{{ Variable definitions
 
 
@@ -89,11 +75,11 @@ local scrlocker    = "slock"
 awful.util.terminal = terminal
 awful.util.tagnames = { "www", "soc", "gam", "prog", "tsk" }
 awful.layout.layouts = {
-    awful.layout.suit.floating,
+    --awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
+    --awful.layout.suit.tile.left,
+    --awful.layout.suit.tile.bottom,
+    --awful.layout.suit.tile.top,
     --awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
     --awful.layout.suit.spiral,
@@ -229,9 +215,28 @@ screen.connect_signal("arrange", function (s)
         end
     end
 end)
+
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
 -- }}}
+
+-- Quake
+-- This config is still a bit jank, screen switching messes
+-- the geometry and the first toggle still has the titlebar
+local quake_name = "Quake"
+local quake = lain.util.quake({
+    app = "alacritty",
+    name = quake_name,
+    -- Alacritty title option doesn't set the window class, separate option for it
+    argname = "--class %s",
+    extra = string.format("--title \"%s\" --config-file \"%s/.config/alacritty/quake.yml\"", quake_name, os.getenv("HOME")),
+    followtag = true,
+    height = 0.4,
+    settings = function(c)
+        awful.titlebar.hide(c)
+    end
+})
+
 
 -- {{{ Mouse bindings
 root.buttons(my_table.join(
@@ -355,6 +360,10 @@ globalkeys = my_table.join(
             end
         end,
         {description = "toggle wibox", group = "awesome"}),
+
+    -- Show/Hide Quake
+    awful.key({ modkey, }, "g", function () quake:toggle() end,
+              {description = "toggle the dropdown quake terminal", group = "screen"}),
 
     -- On the fly useless gaps change
     awful.key({ altkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end,
@@ -754,6 +763,33 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+-- Add titlebars only when floating - ripped straight from /u/Ham5andw1ch/
+-- https://www.reddit.com/r/awesomewm/comments/bki1md/show_titlebar_only_when_window_is_floating/
+client.connect_signal("property::floating", function(c)
+    if c.floating then
+        awful.titlebar.show(c)
+    else
+        awful.titlebar.hide(c)
+    end
+end)
+client.connect_signal("manage", function(c)
+    if c.floating or c.first_tag.layout.name == "floating" then
+        awful.titlebar.show(c)
+    else
+        awful.titlebar.hide(c)
+    end
+end)
+tag.connect_signal("property::layout", function(t)
+    local clients = t:clients()
+    for k,c in pairs(clients) do
+        if c.floating or c.first_tag.layout.name == "floating" then
+            awful.titlebar.show(c)
+        else
+            awful.titlebar.hide(c)
+        end
+    end
+end)
 
 -- possible workaround for tag preservation when switching back to default screen:
 -- https://github.com/lcpz/awesome-copycats/issues/251
