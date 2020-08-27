@@ -9,5 +9,6 @@ function run {
 
 #run discord
 #run steam
+run mpd
 setxkbmap -option compose:menu br
 

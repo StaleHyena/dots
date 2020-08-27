@@ -157,6 +157,6 @@ export EDITOR=nvim
 # change to vi mode
 set -o vi
 
-export PATH="$PATH":/home/public/scripts
+export PATH="$PATH":/home/public/scripts:"$HOME"/.cargo/bin
 
 eval "$(starship init bash)"

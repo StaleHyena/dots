@@ -499,13 +499,6 @@ globalkeys = my_table.join(
         end,
         {description = "mpc on/off", group = "widgets"}),
 
-    -- Copy primary to clipboard (terminals to gtk)
-    awful.key({ modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
-              {description = "copy terminal to gtk", group = "hotkeys"}),
-    -- Copy clipboard to primary (gtk to terminals)
-    awful.key({ modkey }, "v", function () awful.spawn.with_shell("xsel -b | xsel") end,
-              {description = "copy gtk to terminal", group = "hotkeys"}),
-
     -- User programs
     -- awful.key({ modkey }, "q", function () awful.spawn(browser) end,
               -- {description = "run browser", group = "launcher"}),
@@ -753,6 +746,7 @@ client.connect_signal("request::titlebars", function(c)
     }
 end)
 
+-- Disabled so WarThunder doesn't break
 -- Enable sloppy focus, so that focus follows mouse.
 -- client.connect_signal("mouse::enter", function(c)
 --     c:emit_signal("request::activate", "mouse_enter", {raise = vi_focus})
@@ -767,4 +761,3 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Run the startup programs
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
-
