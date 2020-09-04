@@ -75,12 +75,12 @@ local scrlocker    = "slock"
 awful.util.terminal = terminal
 awful.util.tagnames = { "www", "soc", "gam", "prog", "tsk" }
 awful.layout.layouts = {
-    --awful.layout.suit.floating,
+    awful.layout.suit.floating,
     awful.layout.suit.tile,
-    --awful.layout.suit.tile.left,
-    --awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
-    --awful.layout.suit.fair,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
+    awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
     --awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
@@ -220,24 +220,6 @@ end)
 awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
 -- }}}
 
--- Quake
--- This config is still a bit jank, screen switching messes
--- the geometry and the first toggle still has the titlebar
-local quake_name = "Quake"
-local quake = lain.util.quake({
-    app = "alacritty",
-    name = quake_name,
-    -- Alacritty title option doesn't set the window class, separate option for it
-    argname = "--class %s",
-    extra = string.format("--title \"%s\" --config-file \"%s/.config/alacritty/quake.yml\"", quake_name, os.getenv("HOME")),
-    followtag = true,
-    height = 0.4,
-    settings = function(c)
-        awful.titlebar.hide(c)
-    end
-})
-
-
 -- {{{ Mouse bindings
 root.buttons(my_table.join(
     awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
@@ -362,7 +344,7 @@ globalkeys = my_table.join(
         {description = "toggle wibox", group = "awesome"}),
 
     -- Show/Hide Quake
-    awful.key({ modkey, }, "g", function () quake:toggle() end,
+    awful.key({ modkey, }, "g", function () awful.screen.focused().quake:toggle() end,
               {description = "toggle the dropdown quake terminal", group = "screen"}),
 
     -- On the fly useless gaps change

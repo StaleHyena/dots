@@ -160,3 +160,4 @@ set -o vi
 export PATH="$PATH":/home/public/scripts:"$HOME"/.cargo/bin
 
 eval "$(starship init bash)"
+cat ~/Documents/todo.txt

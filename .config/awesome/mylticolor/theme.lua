@@ -16,7 +16,13 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/mylticolor"
-theme.wallpaper                                 = theme.confdir .. "/wall.png"
+theme.wallpaper                                 = function(scrn)
+    if scrn.index == 1 then
+        return os.getenv("HOME") .. "/Documents/theDoggos/stalepupper.png"
+    else
+        return os.getenv("HOME") .. "/Documents/theDoggos/agropupper_f.png"
+    end
+end
 theme.font                                      = "Cozette 11"
 theme.menu_bg_normal                            = "#000000"
 theme.menu_bg_focus                             = "#000000"
@@ -168,8 +174,8 @@ local cpu = lain.widget.cpu({
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
 local temp = lain.widget.temp({
     timeout = 10,
-    -- tempfile = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input",
-    tempfile = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input",
+    tempfile = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input",
+    -- tempfile = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input",
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, "#f1af5f", tostring(coretemp_now):sub(1, #tostring(coretemp_now) - 2) .. "°C "))
     end
@@ -253,8 +259,22 @@ theme.mpd = lain.widget.mpd({
 })
 
 function theme.at_screen_connect(s)
-    -- Quake application
-    s.quake = lain.util.quake({ app = awful.util.terminal })
+    -- Quake
+    -- This config is still a bit jank, screen switching messes
+    -- the geometry and the first toggle still has the titlebar
+    local quake_name = "Quake"
+    s.quake = lain.util.quake({
+        app = awful.util.terminal or "alacritty",
+        name = quake_name,
+        -- Alacritty title option doesn't set the window class, separate option for it
+        argname = "--class %s",
+        extra = string.format("--title \"%s\" --config-file \"%s/.config/alacritty/quake.yml\"", quake_name, os.getenv("HOME")),
+        followtag = true,
+        height = 0.4,
+        settings = function(c)
+            awful.titlebar.hide(c)
+        end
+    })
 
     -- If wallpaper is a function, call it with the screen
     local wallpaper = theme.wallpaper
