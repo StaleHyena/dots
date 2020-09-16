@@ -9,6 +9,7 @@ function run {
 
 #run discord
 #run steam
+run flameshot
 run mpd
 setxkbmap -option compose:menu br
 

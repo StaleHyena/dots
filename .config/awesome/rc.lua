@@ -71,6 +71,7 @@ local editor       = os.getenv("EDITOR") or "nvim"
 local gui_editor   = os.getenv("GUI_EDITOR") or "gvim"
 local browser      = os.getenv("BROWSER") or "firefox"
 local scrlocker    = "slock"
+local printprog    = "flameshot gui"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "www", "soc", "gam", "prog", "tsk" }
@@ -401,10 +402,6 @@ globalkeys = my_table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-    -- Dropdown application
-    awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end,
-              {description = "dropdown application", group = "launcher"}),
-
     -- Widgets popups
     awful.key({ altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
               {description = "show calendar", group = "widgets"}),
@@ -491,10 +488,8 @@ globalkeys = my_table.join(
         {description = "mpc on/off", group = "widgets"}),
 
     -- User programs
-    -- awful.key({ modkey }, "q", function () awful.spawn(browser) end,
-              -- {description = "run browser", group = "launcher"}),
-    -- awful.key({ modkey }, "a", function () awful.spawn(guieditor) end,
-              -- {description = "run gui editor", group = "launcher"}),
+    awful.key({ }, "Print", function () awful.spawn(printprog) end,
+              {description = "screenshot", group = "launcher"}),
 
     -- Default
     --[[ Menubar

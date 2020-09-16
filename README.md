@@ -16,7 +16,7 @@ Huge thanks to [@lcpz](https://github.com/lcpz) for maintaing these awesome exte
   - DE
     - [Picom](https://github.com/yshui/picom), less screentear and window transparency
     - [Cozette bitmap font](https://github.com/slavfox/Cozette), bitmap fonts need to be enabled through fontconfig
-    - [Flameshot](https://github.com/lupoDharkael/flameshot), not on autostart nor keybound
+    - [Flameshot](https://github.com/lupoDharkael/flameshot), rip out of `autostart.sh` if not needed/installed
     - [MPD](https://github.com/MusicPlayerDaemon/MPD)
   - Terminal Emulator
     - [Starship prompt](https://github.com/starship/starship), if not installed `.bashrc` must drop the last line
