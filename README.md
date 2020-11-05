@@ -28,9 +28,12 @@ Huge thanks to [@lcpz](https://github.com/lcpz) for maintaing these awesome exte
   - [PSD](https://github.com/graysky2/profile-sync-daemon) is setup to work with firefox with minimal backups
   - [youtube-dl](https://github.com/ytdl-org/youtube-dl) saves files with a saner filename
   - [lain's mpd widget](https://github.com/lcpz/lain/wiki/mpd) guesses artist name if the songname includes it (ymmv)
+  - Sloppy focus is disabled if the focused client's fullscreen
 
 # Install
-Running `install.sh` from anywhere will symlink every configfile into their place,  
-backing up existing configs by moving them with a "~" in front.
+Running `install.sh` from anywhere will symlink every dotfile into their place,  
+backing up existing configs by renaming them with a tilde prefix.
+
+Even then, backups are always your friend!
   
-[Vim-plug](https://github.com/junegunn/vim-plug) must be installed manually atm. `:PlugInstall` afterwards.
+[Vim-plug](https://github.com/junegunn/vim-plug) must be installed manually. `:PlugInstall` afterwards.
