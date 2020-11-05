@@ -732,45 +732,32 @@ client.connect_signal("request::titlebars", function(c)
     }
 end)
 
--- Disabled so WarThunder doesn't break
--- Enable sloppy focus, so that focus follows mouse.
--- client.connect_signal("mouse::enter", function(c)
---     c:emit_signal("request::activate", "mouse_enter", {raise = vi_focus})
--- end)
+-- Sloppy focus only when focused client isn't fullscreen, as a fix for WarThunder
+client.connect_signal("mouse::enter", function(c)
+  if not client.focus.fullscreen then
+    c:emit_signal("request::activate", "mouse_enter", {raise = vi_focus})
+  end
+end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
--- Add titlebars only when floating - ripped straight from /u/Ham5andw1ch/
--- https://www.reddit.com/r/awesomewm/comments/bki1md/show_titlebar_only_when_window_is_floating/
-client.connect_signal("property::floating", function(c)
-    if c.floating then
-        awful.titlebar.show(c)
-    else
-        awful.titlebar.hide(c)
-    end
-end)
-client.connect_signal("manage", function(c)
-    if c.floating or c.first_tag.layout.name == "floating" then
-        awful.titlebar.show(c)
-    else
-        awful.titlebar.hide(c)
-    end
-end)
-tag.connect_signal("property::layout", function(t)
-    local clients = t:clients()
-    for k,c in pairs(clients) do
-        if c.floating or c.first_tag.layout.name == "floating" then
-            awful.titlebar.show(c)
-        else
-            awful.titlebar.hide(c)
-        end
-    end
-end)
-
 -- possible workaround for tag preservation when switching back to default screen:
 -- https://github.com/lcpz/awesome-copycats/issues/251
 -- }}}
+
+function naughty.config.notify_callback(args)
+  local c = client.focus
+  if c then
+	if c.fullscreen and args.timeout ~= 0 then
+		naughty.suspend()
+		return
+	else
+		naughty.resume()
+		return args
+	end
+  end
+end
 
 -- Run the startup programs
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")

@@ -17,10 +17,13 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/mylticolor"
 theme.wallpaper                                 = function(scrn)
+    -- This does throw if the images don't exist, which is dumb
     if scrn.index == 1 then
         return os.getenv("HOME") .. "/Documents/theDoggos/stalepupper.png"
+        -- return os.getenv("HOME") .. "/.config/awesome/mylticolor/wall.png"
     else
         return os.getenv("HOME") .. "/Documents/theDoggos/agropupper_f.png"
+        -- return os.getenv("HOME") .. "/.config/awesome/mylticolor/wall.png"
     end
 end
 theme.font                                      = "Cozette 11"
