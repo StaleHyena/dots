@@ -3,6 +3,3 @@ show_always = true
 
 [memory_usage]
 disabled = true
-
-[directory]
-suffix = ""
