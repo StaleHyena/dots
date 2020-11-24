@@ -1,7 +1,6 @@
 let g:mapleader="\<SPACE>"
 nnoremap <F1> :bprev<Enter>
 nnoremap <F2> :bnext<Enter>
-nnoremap ; :
 nnoremap <Leader>b :Buffers<CR>
 " turn terminal to normal mode with escape
 tnoremap <Esc> <C-\><C-n>
@@ -32,5 +31,4 @@ function! NumberToggle()
   endif
 endfunc
 nnoremap <Leader>r :call NumberToggle()<CR>
-nnoremap <Leader>C :Codi!<CR>
 

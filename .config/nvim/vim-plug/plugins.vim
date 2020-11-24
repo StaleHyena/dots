@@ -11,6 +11,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'  
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
 
 Plug 'joshdick/onedark.vim'
 
