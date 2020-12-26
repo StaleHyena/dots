@@ -157,7 +157,7 @@ export EDITOR=nvim
 # change to vi mode
 set -o vi
 
-export PATH="$PATH":/home/public/scripts:"$HOME"/.cargo/bin
+export PATH="$PATH":/home/public/scripts:"$HOME"/.cargo/bin:"$HOME"/.local/bin
 
 eval "$(starship init bash)"
-cat ~/todo.txt
+if [ -e ~/todo.txt ]; then cat ~/todo.txt; fi
