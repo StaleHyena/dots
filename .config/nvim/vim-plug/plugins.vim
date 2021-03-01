@@ -12,6 +12,7 @@ Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'rust-lang/rust.vim'
 
 Plug 'joshdick/onedark.vim'
 
@@ -20,7 +21,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 call plug#end()
 
 " coc
-let g:coc_global_extensions = [ 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver' ]
+let g:coc_global_extensions = [ 'coc-css', 'coc-html', 'coc-json', 'coc-prettier' ]
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
