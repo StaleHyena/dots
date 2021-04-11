@@ -14,7 +14,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rust-lang/rust.vim'
 
-Plug 'joshdick/onedark.vim'
+Plug 'https://gitlab.com/yorickpeterse/happy_hacking.vim.git'
 
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
@@ -74,7 +74,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+nmap <F12> <Plug>(coc-rename)
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 

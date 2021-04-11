@@ -17,8 +17,10 @@ set spelllang+=cjk
 syntax enable
 set hidden                        " keep open buffers
 set nowrap
-set encoding=utf-8
-set fileencoding=utf-8
+if (&modifiable)
+	set encoding=utf-8
+	set fileencoding=utf-8
+endif
 set splitbelow                    " horiz. splits aways below
 set splitright                    " vert. splits aways right
 set nobackup                      " recommended by coc

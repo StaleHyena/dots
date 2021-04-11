@@ -153,6 +153,7 @@ if ! shopt -oq posix; then
 fi
 
 export EDITOR=nvim
+export MANPAGER="nvim -M -c set\ filetype=man -- -"
 
 # change to vi mode
 set -o vi
