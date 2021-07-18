@@ -161,4 +161,4 @@ set -o vi
 export PATH="$PATH":/home/public/scripts:"$HOME"/.cargo/bin:"$HOME"/.local/bin
 
 eval "$(starship init bash)"
-if [ -e ~/todo.txt ]; then cat ~/todo.txt; fi
+if [ -e ~/todo.txt ]; then cat /apnp/sched.txt; cat ~/todo.txt; fi
