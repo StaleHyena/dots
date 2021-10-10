@@ -30,5 +30,6 @@ link_whole_dir "$dir/.config" "$HOME/.config"
 backup_and_link "$dir/.tmux.conf" "$HOME/.tmux.conf"
 backup_and_link "$dir/.bashrc" "$HOME/.bashrc"
 backup_and_link "$dir/.xinitrc" "$HOME/.xinitrc"
+backup_and_link "$dir/.dwmstart" "$HOME/.dwmstart"
 echo "Done!"
 

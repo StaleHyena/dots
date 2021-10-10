@@ -5,4 +5,5 @@ wacominit.sh
 dunst &
 #awesome > ~/.awesome.log 2>&1
 slstatus &
-exec dwm
+unclutter --timeout 4 --exclude-root --ignore-scrolling --fork
+exec ~/.dwmstart
