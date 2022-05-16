@@ -153,12 +153,22 @@ if ! shopt -oq posix; then
 fi
 
 export EDITOR=nvim
-export MANPAGER="nvim -M -c set\ filetype=man -- -"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 # change to vi mode
 set -o vi
 
 export PATH="$PATH":/home/public/scripts:"$HOME"/.cargo/bin:"$HOME"/.local/bin
+
+# GPG stuff
+export GPG_TTY=$(tty)
+
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+gpg-connect-agent updatestartuptty /bye >/dev/null
 
 eval "$(starship init bash)"
 if [ -e ~/todo.txt ]; then cat /apnp/sched.txt; cat ~/todo.txt; fi
