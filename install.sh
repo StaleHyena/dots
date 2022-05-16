@@ -4,7 +4,7 @@ function backup_and_link {
 	local source="$1"
 	local target="$2"
 	if [[ -e "$target" ]]; then
-		local backup="$(dirname -- $target)"/~"$(basename -- $target)"
+		local backup="$(dirname -- $target)"/"$(basename -- $target).confbak"
 		echo "Moving \"$target\" to \"$backup\""
 		mv "$target" "$backup"
 	fi
@@ -27,6 +27,7 @@ dir="$(dirname -- $0)"
 dir="$(realpath -- $dir)"
 
 link_whole_dir "$dir/.config" "$HOME/.config"
+backup_and_link "$dir/.gnupg/gpg-agent.conf" "$HOME/.gnupg/gpg-agent.conf"
 backup_and_link "$dir/.tmux.conf" "$HOME/.tmux.conf"
 backup_and_link "$dir/.bashrc" "$HOME/.bashrc"
 backup_and_link "$dir/.xinitrc" "$HOME/.xinitrc"
