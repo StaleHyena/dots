@@ -61,7 +61,7 @@ end
 
 
 
-local chosen_theme = "mylticolor" 
+local chosen_theme = "mylticolor"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "alacritty"
@@ -74,7 +74,7 @@ local scrlocker    = "slock"
 local printprog    = "flameshot gui"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "www", "soc", "gam", "prog", "tsk" }
+awful.util.tagnames = { "www", "soc", "gam", "prog", "tsk", "xtr" }
 awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
@@ -496,13 +496,13 @@ globalkeys = my_table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
     --]]
-    --[[ dmenu
-    awful.key({ modkey }, "x", function ()
+    -- dmenu
+    awful.key({ modkey }, "r", function ()
             os.execute(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
             beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
         end,
-        {description = "show dmenu", group = "launcher"})
-    --]]
+        {description = "show dmenu", group = "launcher"}),
+
     -- alternatively use rofi, a dmenu-like application with more features
     -- check https://github.com/DaveDavenport/rofi for more details
     --[[ rofi
@@ -513,8 +513,8 @@ globalkeys = my_table.join(
         {description = "show rofi", group = "launcher"}),
     --]]
     -- Prompt
-    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
+    -- awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
+    --           {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
