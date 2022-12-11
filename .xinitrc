@@ -1,6 +1,5 @@
 #picom -CGb
-setxkbmap -option compose:menu br
-xset r rate 175 80
+./.xkbdconf
 hsetroot -root -solid black
 wacominit.sh
 unclutter --timeout 4 --exclude-root --ignore-scrolling --fork

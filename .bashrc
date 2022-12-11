@@ -171,4 +171,4 @@ fi
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
 eval "$(starship init bash)"
-if [ -e ~/todo.txt ]; then cat /apnp/sched.txt; cat ~/todo.txt; fi
+if [ -e ~/todo.txt ]; then cat ~/todo.txt; fi
